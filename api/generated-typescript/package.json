@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@fern-typescript/service-utils": "0.0.68"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4"
+  }
+}

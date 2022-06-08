@@ -1,0 +1,81 @@
+types:
+  OrderDto:
+    properties:
+      uid: optional<string>
+      createdAt: optional<string>
+      pageIndex: optional<integer>
+      totalPages: optional<integer>
+      totalItems: optional<integer>
+      items: optional<list<OrderDto>>
+      type: optional<string>
+      title: optional<string>
+      status: optional<integer>
+      detail: optional<string>
+      instance: optional<string>
+  OrderDtoPagedListResultDto:
+    properties:
+      uid: optional<string>
+      createdAt: optional<string>
+      pageIndex: optional<integer>
+      totalPages: optional<integer>
+      totalItems: optional<integer>
+      items: optional<list<OrderDto>>
+      type: optional<string>
+      title: optional<string>
+      status: optional<integer>
+      detail: optional<string>
+      instance: optional<string>
+  ProblemDetails:
+    properties:
+      uid: optional<string>
+      createdAt: optional<string>
+      pageIndex: optional<integer>
+      totalPages: optional<integer>
+      totalItems: optional<integer>
+      items: optional<list<OrderDto>>
+      type: optional<string>
+      title: optional<string>
+      status: optional<integer>
+      detail: optional<string>
+      instance: optional<string>
+errors:
+  Unauthorized:
+    http:
+      statusCode: 401
+    properties:
+      problemDetails: ProblemDetails
+  Forbidden:
+    http:
+      statusCode: 403
+    properties:
+      problemDetails: ProblemDetails
+services:
+  http:
+    OpenApiService:
+      auth: bearer
+      endpoints:
+        getOrderByUid:
+          method: GET
+          path: /api/Orders/{uid}
+          parameters:
+            uid: string
+          queryParameters: {}
+          response:
+            ok: OrderDto
+            errors:
+              union:
+                unauthorized: Unauthorized
+                forbidden: Forbidden
+        getOrders:
+          method: GET
+          path: /api/Orders
+          parameters: {}
+          queryParameters:
+            PageIndex: optional<integer>
+            PageSize: optional<integer>
+          response:
+            ok: OrderDtoPagedListResultDto
+            errors:
+              union:
+                unauthorized: Unauthorized
+                forbidden: Forbidden

@@ -1,0 +1,8 @@
+name: Orders API
+definition: src
+generators:
+  - name: fernapi/fern-typescript
+    version: 0.0.71
+    output: generated-typescript
+    config:
+      mode: client
